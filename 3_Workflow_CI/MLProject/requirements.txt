@@ -3,6 +3,4 @@ numpy
 scikit-learn
 mlflow
 matplotlib
-seaborn
 joblib
-python-dotenv
