@@ -1,0 +1,45 @@
+name: 02 Training with DagsHub MLflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "2_Membangun_Model/**"
+      - ".github/workflows/02-training-dagshub.yml"
+
+jobs:
+  train-dagshub:
+    runs-on: ubuntu-latest
+
+    env:
+      MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+      MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          cd 2_Membangun_Model
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run manual logging tuning training
+        run: |
+          cd 2_Membangun_Model
+          python modelling_tuning.py
+
+      - name: Upload local artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: titanic-model-training-artifacts
+          path: 2_Membangun_Model/artifacts

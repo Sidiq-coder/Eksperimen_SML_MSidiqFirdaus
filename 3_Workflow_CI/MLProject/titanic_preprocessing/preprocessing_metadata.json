@@ -1,0 +1,56 @@
+{
+    "dataset_name": "Titanic Dataset",
+    "target_column": "Survived",
+    "raw_shape": [
+        891,
+        12
+    ],
+    "clean_shape": [
+        891,
+        10
+    ],
+    "train_shape": [
+        712,
+        13
+    ],
+    "test_shape": [
+        179,
+        13
+    ],
+    "test_size": 0.2,
+    "random_state": 42,
+    "drop_columns": [
+        "PassengerId",
+        "Name",
+        "Ticket",
+        "Cabin"
+    ],
+    "numeric_features": [
+        "Pclass",
+        "Age",
+        "SibSp",
+        "Parch",
+        "Fare",
+        "FamilySize",
+        "IsAlone"
+    ],
+    "categorical_features": [
+        "Sex",
+        "Embarked"
+    ],
+    "processed_feature_names": [
+        "num__Pclass",
+        "num__Age",
+        "num__SibSp",
+        "num__Parch",
+        "num__Fare",
+        "num__FamilySize",
+        "num__IsAlone",
+        "cat__Sex_female",
+        "cat__Sex_male",
+        "cat__Embarked_C",
+        "cat__Embarked_Q",
+        "cat__Embarked_S"
+    ],
+    "created_at": "2026-06-09T13:12:55.826652"
+}

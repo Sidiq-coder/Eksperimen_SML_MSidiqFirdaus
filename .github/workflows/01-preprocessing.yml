@@ -1,0 +1,51 @@
+name: 01 Preprocessing Dataset
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "1_Eksperimen_Preprocessing/**"
+      - ".github/workflows/01-preprocessing.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  preprocessing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          cd 1_Eksperimen_Preprocessing
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run preprocessing
+        run: |
+          cd 1_Eksperimen_Preprocessing/preprocessing
+          python automate_MuhammadSidiqFirdaus.py
+
+      - name: Upload processed dataset
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-titanic-dataset
+          path: 1_Eksperimen_Preprocessing/preprocessing/namadataset_preprocessing
+
+      - name: Commit processed dataset
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add 1_Eksperimen_Preprocessing/preprocessing/namadataset_preprocessing
+          git commit -m "Update processed Titanic dataset" || echo "No changes to commit"
+          git push

@@ -1,0 +1,14 @@
+[
+    "num__Pclass",
+    "num__Age",
+    "num__SibSp",
+    "num__Parch",
+    "num__Fare",
+    "num__FamilySize",
+    "num__IsAlone",
+    "cat__Sex_female",
+    "cat__Sex_male",
+    "cat__Embarked_C",
+    "cat__Embarked_Q",
+    "cat__Embarked_S"
+]

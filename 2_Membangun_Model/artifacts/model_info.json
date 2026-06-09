@@ -1,0 +1,32 @@
+{
+    "model_name": "RandomForestClassifier",
+    "dataset": "Titanic Dataset",
+    "target_column": "Survived",
+    "created_at": "2026-06-09T13:56:41.195822",
+    "metrics": {
+        "accuracy": 0.8044692737430168,
+        "precision_weighted": 0.8057107386716326,
+        "recall_weighted": 0.8044692737430168,
+        "f1_weighted": 0.7987870108107954,
+        "roc_auc": 0.8371541501976284,
+        "best_cv_score": 0.8219359111926771,
+        "training_time_seconds": 6.957629442214966
+    },
+    "features": [
+        "num__Pclass",
+        "num__Age",
+        "num__SibSp",
+        "num__Parch",
+        "num__Fare",
+        "num__FamilySize",
+        "num__IsAlone",
+        "cat__Sex_female",
+        "cat__Sex_male",
+        "cat__Embarked_C",
+        "cat__Embarked_Q",
+        "cat__Embarked_S"
+    ],
+    "dagshub_repo_owner": "msidiqfirdauss",
+    "dagshub_repo_name": "Eksperimen_SML_MSidiqFirdaus",
+    "mlflow_experiment_name": "Titanic_Advanced_Manual_Logging"
+}
