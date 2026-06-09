@@ -17,7 +17,16 @@ jobs:
       - name: Show Directory Structure
         run: |
           pwd
-          ls -R
+          echo "=== ROOT ==="
+          ls -la
+          echo "=== 3_Workflow_CI ==="
+          ls -la 3_Workflow_CI || true
+          echo "=== MLProject ==="
+          ls -la 3_Workflow_CI/MLProject || true
+          echo "=== Dataset Folder ==="
+          ls -la 3_Workflow_CI/MLProject/titanic_preprocessing || true
+          echo "=== Find CSV Files ==="
+          find . -name "*.csv"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,8 +40,8 @@ jobs:
 
       - name: Check dataset files
         run: |
-          test -f 3_Workflow_CI/MLProject/titanic_preprocesing/train.csv
-          test -f 3_Workflow_CI/MLProject/titanic_preprocesing/test.csv
+          test -f 3_Workflow_CI/MLProject/titanic_preprocessing/train.csv
+          test -f 3_Workflow_CI/MLProject/titanic_preprocessing/test.csv
           echo "Dataset files found."
 
       - name: Run MLflow Project
