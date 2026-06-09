@@ -5,8 +5,8 @@ import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-TRAIN_PATH = os.path.join("namadataset_preprocessing", "train.csv")
-TEST_PATH = os.path.join("namadataset_preprocessing", "test.csv")
+TRAIN_PATH = os.path.join("titanic_preprocessing", "train.csv")
+TEST_PATH = os.path.join("titanic_preprocessing", "test.csv")
 TARGET_COLUMN = "Survived"
 
 
