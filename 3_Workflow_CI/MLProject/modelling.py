@@ -2,22 +2,25 @@ import os
 import time
 import json
 import joblib
+import pandas as pd
 import mlflow
 import mlflow.sklearn
-import pandas as pd
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
-TRAIN_PATH = os.path.join("titanic_preprocessing", "train.csv")
-TEST_PATH = os.path.join("titanic_preprocessing", "test.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+TRAIN_PATH = os.path.join(BASE_DIR, "titanic_preprocessing", "train.csv")
+TEST_PATH = os.path.join(BASE_DIR, "titanic_preprocessing", "test.csv")
 TARGET_COLUMN = "Survived"
-ARTIFACT_DIR = "artifacts"
+ARTIFACT_DIR = os.path.join(BASE_DIR, "artifacts")
 
 
-def load_data():
+def load_dataset():
     print("Current working directory:", os.getcwd())
+    print("Base directory:", BASE_DIR)
     print("Train path:", TRAIN_PATH)
     print("Test path:", TEST_PATH)
 
@@ -29,12 +32,6 @@ def load_data():
 
     train_df = pd.read_csv(TRAIN_PATH)
     test_df = pd.read_csv(TEST_PATH)
-
-    if TARGET_COLUMN not in train_df.columns:
-        raise ValueError(f"Kolom target {TARGET_COLUMN} tidak ada di train.csv")
-
-    if TARGET_COLUMN not in test_df.columns:
-        raise ValueError(f"Kolom target {TARGET_COLUMN} tidak ada di test.csv")
 
     X_train = train_df.drop(columns=[TARGET_COLUMN])
     y_train = train_df[TARGET_COLUMN]
@@ -48,9 +45,7 @@ def load_data():
 def main():
     os.makedirs(ARTIFACT_DIR, exist_ok=True)
 
-    mlflow.set_experiment("Titanic_Workflow_CI")
-
-    X_train, X_test, y_train, y_test = load_data()
+    X_train, X_test, y_train, y_test = load_dataset()
 
     model = RandomForestClassifier(
         n_estimators=100,
@@ -60,7 +55,13 @@ def main():
 
     start_time = time.time()
 
-    with mlflow.start_run(run_name="workflow_ci_titanic_random_forest"):
+    # Jangan gunakan mlflow.set_experiment() di dalam MLflow Project.
+    # mlflow run . sudah membuat run secara otomatis.
+    with mlflow.start_run():
+        mlflow.set_tag("mlflow.runName", "workflow_ci_titanic_random_forest")
+        mlflow.set_tag("project", "Titanic Workflow CI")
+        mlflow.set_tag("model", "RandomForestClassifier")
+
         model.fit(X_train, y_train)
 
         y_pred = model.predict(X_test)
@@ -110,10 +111,10 @@ def main():
         )
 
     print("Training selesai menggunakan MLflow Project.")
-    print(f"Accuracy: {accuracy:.4f}")
+    print(f"Accuracy : {accuracy:.4f}")
     print(f"Precision: {precision:.4f}")
-    print(f"Recall: {recall:.4f}")
-    print(f"F1 Score: {f1:.4f}")
+    print(f"Recall   : {recall:.4f}")
+    print(f"F1 Score : {f1:.4f}")
 
 
 if __name__ == "__main__":
