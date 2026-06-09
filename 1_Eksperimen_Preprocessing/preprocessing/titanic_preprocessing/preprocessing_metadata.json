@@ -5,25 +5,13 @@
         891,
         12
     ],
-    "clean_shape": [
-        891,
-        10
-    ],
-    "train_shape": [
+    "processed_train_shape": [
         712,
         13
     ],
-    "test_shape": [
+    "processed_test_shape": [
         179,
         13
-    ],
-    "test_size": 0.2,
-    "random_state": 42,
-    "drop_columns": [
-        "PassengerId",
-        "Name",
-        "Ticket",
-        "Cabin"
     ],
     "numeric_features": [
         "Pclass",
@@ -38,7 +26,13 @@
         "Sex",
         "Embarked"
     ],
-    "processed_feature_names": [
+    "drop_columns": [
+        "PassengerId",
+        "Name",
+        "Ticket",
+        "Cabin"
+    ],
+    "feature_names": [
         "num__Pclass",
         "num__Age",
         "num__SibSp",
@@ -52,5 +46,5 @@
         "cat__Embarked_Q",
         "cat__Embarked_S"
     ],
-    "created_at": "2026-06-09T13:12:55.826652"
+    "created_at": "2026-06-09T16:07:29.208728"
 }

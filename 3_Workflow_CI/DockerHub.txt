@@ -1,7 +1,0 @@
-Isi manual setelah workflow Docker Hub berhasil.
-
-Docker Hub Image:
-docker.io/USERNAME_DOCKERHUB/sml-titanic-model:latest
-
-Pull command:
-docker pull USERNAME_DOCKERHUB/sml-titanic-model:latest
