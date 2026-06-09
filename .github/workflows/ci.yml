@@ -23,6 +23,8 @@ jobs:
           ls -la 3_Workflow_CI/MLProject || true
           echo "=== Dataset Folder ==="
           ls -la 3_Workflow_CI/MLProject/titanic_preprocessing || true
+          echo "=== MLProject file content ==="
+          cat 3_Workflow_CI/MLProject/MLProject
           echo "=== Find CSV Files ==="
           find . -name "*.csv"
 
@@ -42,13 +44,10 @@ jobs:
           test -f 3_Workflow_CI/MLProject/titanic_preprocessing/test.csv
           echo "Dataset files found."
 
-      - name: Show MLProject File
-        run: |
-          cat 3_Workflow_CI/MLProject/MLProject
-
       - name: Run MLflow Project
         run: |
           cd 3_Workflow_CI/MLProject
+          echo "RUNNING MLFLOW PROJECT WITH LOCAL ENV"
           mlflow run . --env-manager=local
 
       - name: Show MLflow Output
