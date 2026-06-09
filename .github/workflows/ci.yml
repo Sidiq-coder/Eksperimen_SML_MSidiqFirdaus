@@ -19,8 +19,6 @@ jobs:
           pwd
           echo "=== ROOT ==="
           ls -la
-          echo "=== 3_Workflow_CI ==="
-          ls -la 3_Workflow_CI || true
           echo "=== MLProject ==="
           ls -la 3_Workflow_CI/MLProject || true
           echo "=== Dataset Folder ==="
@@ -43,6 +41,10 @@ jobs:
           test -f 3_Workflow_CI/MLProject/titanic_preprocessing/train.csv
           test -f 3_Workflow_CI/MLProject/titanic_preprocessing/test.csv
           echo "Dataset files found."
+
+      - name: Show MLProject File
+        run: |
+          cat 3_Workflow_CI/MLProject/MLProject
 
       - name: Run MLflow Project
         run: |
