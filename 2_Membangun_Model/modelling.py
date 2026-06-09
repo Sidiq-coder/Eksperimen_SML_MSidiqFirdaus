@@ -9,6 +9,7 @@ TRAIN_PATH = os.path.join("titanic_preprocessing", "train.csv")
 TEST_PATH = os.path.join("titanic_preprocessing", "test.csv")
 TARGET_COLUMN = "Survived"
 
+#1
 
 def load_dataset():
     train_df = pd.read_csv(TRAIN_PATH)
