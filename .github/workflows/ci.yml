@@ -1,4 +1,4 @@
-name: MLflow Project CI
+name: 03 MLProject CI Without Docker
 
 on:
   push:
@@ -27,26 +27,26 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r MLProject/requirements.txt
+          pip install -r 3_Workflow_CI/MLProject/requirements.txt
 
       - name: Check dataset files
         run: |
-          test -f MLProject/namadataset_preprocessing/train.csv
-          test -f MLProject/namadataset_preprocessing/test.csv
+          test -f 3_Workflow_CI/MLProject/namadataset_preprocessing/train.csv
+          test -f 3_Workflow_CI/MLProject/namadataset_preprocessing/test.csv
           echo "Dataset files found."
 
       - name: Run MLflow Project
         run: |
-          cd MLProject
+          cd 3_Workflow_CI/MLProject
           mlflow run . --env-manager=local
 
       - name: Show MLflow Output
         run: |
-          cd MLProject
+          cd 3_Workflow_CI/MLProject
           ls -R mlruns || true
 
       - name: Upload MLflow Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: mlflow-runs
-          path: MLProject/mlruns
+          path: 3_Workflow_CI/MLProject/mlruns
