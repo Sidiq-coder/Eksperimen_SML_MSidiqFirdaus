@@ -48,7 +48,7 @@ jobs:
         run: |
           cd 3_Workflow_CI/MLProject
           echo "RUNNING MLFLOW PROJECT WITH LOCAL ENV"
-          mlflow run . --env-manager=local
+          mlflow run . --env-manager local
 
       - name: Show MLflow Output
         run: |
